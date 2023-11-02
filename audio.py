@@ -10,14 +10,14 @@ def record_audio():
         os.mkdir("audio")
 
     config = configparser.ConfigParser()
-    config.read('./config.ini')
+    config.read('/home/rig/Documents/App/main/config.ini')
 
     audioConfig = {
-        "host": config.get('audio.config', 'audio_host'),
-        "frequence": config.get('audio.config', 'frequence'),
-        "dev_index": config.get('audio.config', 'dev_index'),
-        "samp_rate": config.get('audio.config', 'samp_rate'),
-        "chunk": config.get('audio.config', 'chunk')
+        "host": config.get('audio', 'audio_host'),
+        "frequence": config.get('audio', 'frequence'),
+        "dev_index": config.get('audio', 'dev_index'),
+        "samp_rate": config.get('audio', 'samp_rate'),
+        "chunk": config.get('audio', 'chunk')
     }
 
     form_1 = pyaudio.paInt16 
@@ -36,7 +36,7 @@ def record_audio():
                     input_device_index = dev_index,input = True, frames_per_buffer=chunk)
 
         timestamp = int(time.time())
-        fileName = f"audio/audio_{timestamp}.wav"
+        fileName = f"/home/rig/Documents/App/main/audio/audio_{timestamp}.wav"
         frames = []
 
         for i in range(0, int((samp_rate/chunk)*record_secs)):

@@ -3,6 +3,10 @@ import os
 
 
 def sendData(web_service_url, fileName, fileType):
+    if(fileType == "image"):
+        fileName = "/home/rig/Documents/App/main/images/" + fileName
+
+
     with open(fileName, 'rb') as data:
         files = {fileType: (data)}
         response = requests.post(web_service_url, files=files)

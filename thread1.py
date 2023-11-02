@@ -21,14 +21,14 @@ Grove = GroveGSRSensor
 
 def recordImageAndGSR():
     config = configparser.ConfigParser()
-    config.read('config.ini')
+    config.read('/home/rig/Documents/App/main/config.ini')
 
     imageConfig = {
-        "host": config.get('IMAGE', 'image_host'),
-        "loresX": config.get('IMAGE', 'loresX'),
-        "loresY": config.get('IMAGE', 'loresY'),
-        "framerate": config.get('IMAGE', 'framerate'),
-        "frequence": config.get('IMAGE', 'frequence'),
+        "host": config.get("image", 'image_host'),
+        "loresX": config.get("image", 'loresX'),
+        "loresY": config.get("image", 'loresY'),
+        "framerate": config.get("image", 'framerate'),
+        "frequence": config.get("image", 'frequence'),
     }
 
     gsrConfig = {
@@ -59,7 +59,7 @@ def recordImageAndGSR():
 
             #Record and send image
             output = str(timestamp) + "-stream.jpg"
-            camera.capture_file(output)
+            camera.capture_file("/home/rig/Documents/App/main/images/" + output)
             sendData(imageConfig['host'], output, 'image')
         finally:
             time.sleep(float(imageConfig['frequence']))
