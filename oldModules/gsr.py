@@ -1,9 +1,6 @@
-
-import math
-import sys
 import time
 from grove.adc import ADC
-from web_services import sendGSR
+from main.modules.web_services import sendGSR
 
 
 class GroveGSRSensor:

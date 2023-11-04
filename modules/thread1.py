@@ -1,10 +1,11 @@
 import time
 import picamera2
-from web_services import sendData, sendGSR
+from main.modules.web_services import sendData, sendGSR
 from grove.adc import ADC
 import configparser
 
 
+#Grove GSR sensor initiating
 class GroveGSRSensor:
     def __init__(self, channel):
         self.channel = channel
@@ -17,12 +18,13 @@ class GroveGSRSensor:
 
 Grove = GroveGSRSensor
 
-
-
+#Start paralel recording of images and gsr data
 def recordImageAndGSR():
+    #Get configurations from the config.ini
     config = configparser.ConfigParser()
     config.read('/home/rig/Documents/App/main/config.ini')
 
+    #Set the image recording configurations 
     imageConfig = {
         "host": config.get("image", 'image_host'),
         "loresX": config.get("image", 'loresX'),
@@ -31,14 +33,15 @@ def recordImageAndGSR():
         "frequence": config.get("image", 'frequence'),
     }
 
+    #Set the GSR recording configurations
     gsrConfig = {
         "host": config.get('GSR', 'gsr_host'),
         "frequence": config.get('GSR', 'frequence'),
     }
 
+    #Image quality/resolution
     loresX = int(imageConfig['loresX'])
     loresY = int(imageConfig['loresY'])
-
 
     #Camera configs
     camera = picamera2.Picamera2()
@@ -59,7 +62,7 @@ def recordImageAndGSR():
 
             #Record and send image
             output = str(timestamp) + "-stream.jpg"
-            camera.capture_file("/home/rig/Documents/App/main/images/" + output)
+            camera.capture_file("/home/rig/Documents/App/main/data/images/" + output)
             sendData(imageConfig['host'], output, 'image')
         finally:
             time.sleep(float(imageConfig['frequence']))

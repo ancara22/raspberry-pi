@@ -1,10 +1,11 @@
 import time
 import picamera2
-from web_services import sendData
+from main.modules.web_services import sendData
 from picamera2.encoders import H264Encoder
 import configparser
 
 
+#Record images
 def captureImage():
     config = configparser.ConfigParser()
     config.read('config.ini')
@@ -32,11 +33,9 @@ def captureImage():
         finally:
             time.sleep(imageConfig["frequence"]) 
 
-
-
 #To be removed
 #################################################
-
+#Record videos
 def captureVideo():
     picam2 = picamera2.Picamera2()
     video_config = picam2.create_video_configuration(main={"size": (1920, 1080)}, lores={"size": (640, 480)}, display="lores")
