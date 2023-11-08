@@ -5,7 +5,7 @@ import os
 def sendData(web_service_url, fileName, fileType):
     #If it is image, set the path
     if(fileType == "image"):
-        fileName = "/home/rig/Documents/App/data/main/images/" + fileName
+        fileName = "/home/rig/Documents/App/main/data/images/" + fileName
 
     #Open and read the saved file
     with open(fileName, 'rb') as data:

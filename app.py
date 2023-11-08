@@ -1,6 +1,6 @@
 import threading
-from main.modules.audio import record_audio
-from main.modules.thread1 import recordImageAndGSR
+from modules.audio import record_audio
+from modules.thread1 import recordImageAndGSR
 
 
 #Rund the app

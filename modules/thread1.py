@@ -1,6 +1,6 @@
 import time
 import picamera2
-from main.modules.web_services import sendData, sendGSR
+from modules.web_services import sendData, sendGSR
 from grove.adc import ADC
 import configparser
 

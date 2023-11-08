@@ -1,7 +1,7 @@
 import pyaudio
 import wave
 import time
-from main.modules.web_services import sendData
+from modules.web_services import sendData
 import configparser
 
 
