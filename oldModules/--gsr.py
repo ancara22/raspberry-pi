@@ -4,7 +4,6 @@ from main.modules.web_services import sendGSR
 
 
 class GroveGSRSensor:
-
     def __init__(self, channel):
         self.channel = channel
         self.adc = ADC()
