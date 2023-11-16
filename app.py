@@ -1,8 +1,8 @@
 import os
 import threading
-from modules.audio_recorder import startRecordingListener
+from modules.audio_recorder import  record_audio
 from modules.image_gsr_recorder import recordImageAndGSR
-
+from modules.buzzer import emit_start_sound, emit_short_sound
 
 # Remove the files that stuk in the system because of the app stop
 def cleanJunkFiles(directory_path, file_type):
@@ -20,15 +20,19 @@ def cleanJunkFiles(directory_path, file_type):
 
 #Rund the app
 if __name__ == '__main__':
-   cleanJunkFiles("/home/rig/Documents/App/main/data/audio", ".wav")     # Remove the audio files
-   cleanJunkFiles("/home/rig/Documents/App/main/data/images", ".jpg")    # Remove the jpg files
+    cleanJunkFiles("/home/rig/Documents/App/main/data/audio", ".wav")     # Remove the audio files
+    cleanJunkFiles("/home/rig/Documents/App/main/data/images", ".jpg")    # Remove the jpg files
 
-   thread1 = threading.Thread(target=recordImageAndGSR)        # Image and GSR recording
-   thread2 = threading.Thread(target=startRecordingListener)   # Live Speech detection and audio recording
+    thread1 = threading.Thread(target=recordImageAndGSR)        # Image and GSR recording
+    thread2 = threading.Thread(target=record_audio)             # Audio recording
 
-   thread1.start()
-   thread2.start()
+    emit_start_sound()
+    thread1.start()
+    thread2.start()
 
+    thread1.join()
+    thread2.join()
+    emit_short_sound()
 
 
 
